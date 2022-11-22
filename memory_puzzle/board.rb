@@ -1,7 +1,7 @@
 require_relative "card.rb"
 
 class Board
-  def initialize(size=5)
+  def initialize(size=4)
     @size = size
     @grid = Array.new(size) { Array.new(size, nil) }  # TODO: Check board dimensions
     @num_pairs = (size * size) / 2
@@ -78,6 +78,17 @@ class Board
 
   def print(output)
     output.each {|row| puts row.join(" ")}
+  end
+
+  def won?
+    @grid.flatten.all? {|card| card.visible == true}
+  end
+
+  def reveal(guess_pos)                   #takes in array
+    if self[guess_pos].visible == false
+      self[guess_pos].reveal
+      return self[guess_pos].to_s
+    end
   end
   
 
