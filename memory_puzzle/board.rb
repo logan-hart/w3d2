@@ -1,4 +1,4 @@
-require_relative
+require_relative "card.rb"
 
 class Board
   def initialize(size=4)
@@ -18,6 +18,19 @@ class Board
   end
 
   def populate
+    card_pairs = card_values.map do |val|
+      card = Card.new(val)
+      [card, card]
+    end
+
+    counter = 0
+    while counter < @size * @size
+      row_1, col_1 = rand_pos
+      if self[row]
+  end
+  
+  def rand_pos
+    [rand(0...@size), rand(0...@size)]
   end
 
   def card_values
