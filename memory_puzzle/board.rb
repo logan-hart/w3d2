@@ -25,8 +25,11 @@ class Board
 
     counter = 0 # [:S, :S]
     while counter < @size * 2
-      row_1, col_1 = rand_pos # TODO: edge case same pair of positions on 28 and 29
-      row_2, col_2 = rand_pos
+      rp_1 = rand_pos
+      rp_2 = rand_pos
+      next if rp_1 == rp_2
+      row_1, col_1 = rp_1 # TODO: Fixed
+      row_2, col_2 = rp_2 # TODO: Fixed
 
       if self[[row_1, col_1]] == nil && self[[row_2, col_2]] == nil
         card_1, card_2 = card_pairs.pop
@@ -51,8 +54,23 @@ class Board
     return values
   end
 
+  def render
+    @grid.each do |subArr|
+      subArr.each do |card|
+        row = []
+        if card.visible == false
+          row << " "
+        else
+          row << card.to_s
+        end
+      end
+      
+    end
+  end
+
   def print
     @grid.each {|row| puts row.join(" ")}
   end
+  
 
 end
