@@ -4,7 +4,7 @@ require_relative 'card'
 class Game
   def initialize
     @board = Board.new
-    @prev_guessed = ""
+    @prev_guessed = nil
   end
 
   def get_pos
@@ -14,6 +14,7 @@ class Game
 
   def play
     while !@board.won?
+      system("clear")
       @board.render
       make_guess(self.get_pos)
 
@@ -22,9 +23,13 @@ class Game
 
   def make_guess(pos)
     @board[pos].reveal
-    if @prev_guessed.empty?
-      @prev_guessed = @board[pos].to_s
-      @board[pos].to_s == @prev_guessed
+    if @prev_guessed.nil?
+      @prev_guessed = @board[pos]
+    else
+      if @board[pos].to_s != @prev_guessed.to_s
+        
+        @prev_guessed = nil
+      end
     end
   end
 end
