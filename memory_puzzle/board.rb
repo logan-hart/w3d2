@@ -55,11 +55,6 @@ class Board
     return values
   end
 
-               #   0 1 2 3
-               # 0 " "
-               # 1
-               # 2
-               # 3
   def render
     new_grid = [(0...@size).to_a.unshift(' ')]
     @grid.each_with_index do |subArr, i|
@@ -77,7 +72,7 @@ class Board
   end
 
   def print(output)
-    output.each {|row| puts row.join(" ")}
+    output.each { |row| puts row.join(" ")}
   end
 
   def won?
