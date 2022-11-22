@@ -19,8 +19,9 @@ class Board
 
   def populate
     card_pairs = card_values.map do |val|
-      card = Card.new(val)
-      [card, card]
+      card_1 = Card.new(val)
+      card_2 = Card.new(val)
+      [card_1, card_2]
     end
 
     counter = 0 # [:S, :S]
@@ -55,21 +56,23 @@ class Board
   end
 
   def render
+    new_grid = []
     @grid.each do |subArr|
+      row = []
       subArr.each do |card|
-        row = []
-        if card.visible == false
+        if card.visible == false        #TODO Check ==
           row << " "
         else
           row << card.to_s
         end
       end
-      
+      new_grid << row
     end
+    self.print(new_grid)
   end
 
-  def print
-    @grid.each {|row| puts row.join(" ")}
+  def print(output)
+    output.each {|row| puts row.join(" ")}
   end
   
 
