@@ -1,7 +1,7 @@
 require_relative "card.rb"
 
 class Board
-  def initialize(size=4)
+  def initialize(size=5)
     @size = size
     @grid = Array.new(size) { Array.new(size, nil) }  # TODO: Check board dimensions
     @num_pairs = (size * size) / 2
@@ -55,10 +55,15 @@ class Board
     return values
   end
 
+               #   0 1 2 3
+               # 0 " "
+               # 1
+               # 2
+               # 3
   def render
-    new_grid = []
-    @grid.each do |subArr|
-      row = []
+    new_grid = [(0...@size).to_a.unshift(' ')]
+    @grid.each_with_index do |subArr, i|
+      row = [i] # [0,]
       subArr.each do |card|
         if card.visible == false        #TODO Check ==
           row << " "
