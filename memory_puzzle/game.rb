@@ -34,7 +34,6 @@ class Game
         sleep(2)
         @prev_guessed.hide
         @board[pos].hide
-        @prev_guessed = nil
         @board.render
       else
         @prev_guessed = nil
