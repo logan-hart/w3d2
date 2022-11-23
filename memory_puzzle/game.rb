@@ -13,7 +13,7 @@ class Game
   end
 
   def play
-    while !@board.won?
+    until @board.won?
       system("clear")
       @board.render
       make_guess(self.get_pos)
@@ -23,13 +23,27 @@ class Game
 
   def make_guess(pos)
     @board[pos].reveal
+    system("clear")
+    @board.render
+
     if @prev_guessed.nil?
       @prev_guessed = @board[pos]
     else
       if @board[pos].to_s != @prev_guessed.to_s
-        
+        puts 'try again'
+        sleep(2)
+        @prev_guessed.hide
+        @board[pos].hide
+        @prev_guessed = nil
+        @board.render
+      else
         @prev_guessed = nil
       end
     end
   end
+end
+
+if $PROGRAM_NAME == __FILE__
+  game = Game.new
+  game.play
 end
